@@ -1,0 +1,44 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block titulo %}Home | {% endblock %}
+
+{% block conteudo %}
+
+<main>
+  <div id="titulo">
+    <img src="{% static 'imagens/alq18.jpeg' %}" alt="foto cervejas" width="90%">
+    <h1>ALQUIMIA CERVEJARIA</h1>
+    <h3>O lugar perfeito para os amantes de cerveja artesanal</h3>
+  </div>
+</main>
+<hr>
+
+<section>
+    <div class="container">
+      <div class="card">
+        <img src="{% static 'imagens/alq20.jpeg' %}" class="card-img-top" alt="Cerveja Alquimia">
+        <div class="card-body">
+          <p class="card-text">Conheça a nossa Cerveja Artesanal da Alquimia. Produzimos constantemente vários estilos entre eles: Pilsen, IPA, Stout, Witbier, Red Ale e outros.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="{% static 'imagens/alq21.jpeg' %}" class="card-img-top" alt="Witbier Alquimia">
+        <div class="card-body">
+          <p class="card-text">Experimente a magia da cerveja Alquimia e supreenda-se com o sabor e refrescancia inigualáveis do nosso precioso líquido. Aqui transformamos água em ouro!</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="{% static 'imagens/alq16.jpeg' %}" class="card-img-top" alt="Growler Alquimia">
+        <div class="card-body">
+          <p class="card-text">Venha para Alquimia e descubra os segredos do nosso mago cervejeiro. Desfrute dessa experiência única, onde cada gole é uma celebração da arte cervejeira. Saúde!</p>
+        </div>
+      </div>
+    </div>
+    <h3>Todas as nossas cervejas são feitas com insumos importados e de alta qualidade! 100% PURO MALTE!</h3>
+    <p>
+      <a href="{% url 'produto:lista' %}" class="btn btn-lg btn-light fw-bold border-white bg-white" id="botao">Conheça nossas cervejas</a>
+    </p>
+</section>
+<hr>
+{% endblock %}

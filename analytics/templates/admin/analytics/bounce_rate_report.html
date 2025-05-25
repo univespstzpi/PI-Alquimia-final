@@ -1,0 +1,43 @@
+{% extends 'admin/base_site.html' %}
+{% load static i18n %}
+
+{% block title %}{{ title }} | {{ site_header|default:_('Django site admin') }}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:_('Django administration') }}</a></h1>
+{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">Início</a> &rsaquo;
+<a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ opts.app_config.verbose_name }}</a> &rsaquo;
+Relatórios &rsaquo;
+Taxa de Rejeição
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4" id="content-main">
+    <form method="get" action="" style="margin-bottom: 20px;">
+        <label for="days">Período (dias):</label>
+        <input type="number" name="days" id="days" value="{{ days_filter }}" min="1" max="365" style="padding: 5px; margin-right: 10px;">
+        <input type="submit" value="Atualizar" class="button">
+    </form>
+    <p>Período analisado: {{ start_date|date:"d/m/Y H:i" }} - {{ end_date|date:"d/m/Y H:i" }}</p>
+
+    <div style="margin-top: 20px; margin-bottom: 20px; padding: 15px; border: 1px solid #ccc; background-color: #f9f9f9; border-radius: 4px;">
+        <h2>Taxa de Rejeição: <strong style="font-size: 1.5em; color: #333;">{{ bounce_rate|floatformat:2 }}%</strong></h2>
+        <p style="margin-bottom: 5px;">Total de Sessões no Período: {{ total_sessions }}</p>
+        <p style="margin-bottom: 0;">Sessões com Rejeição (1 página vista): {{ bounced_sessions_count }}</p>
+    </div>
+
+    {% if total_sessions == 0 %}
+        <p>Não há dados de visualização de página para o período selecionado. Navegue pelo site para gerar dados.</p>
+    {% endif %}
+
+    <p><a href="{% url 'admin:analytics_searchterm_changelist' %}" class="button">Voltar para Termos Buscados</a></p>
+    {% if perms.analytics.view_pageview %}
+    <p><a href="{% url 'admin:analytics_pageview_changelist' %}" class="button">Ver todas as Visualizações de Página</a></p>
+    {% endif %}
+</div>
+{% endblock %}

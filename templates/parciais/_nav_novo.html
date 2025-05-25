@@ -1,0 +1,45 @@
+{% load static %}
+{% load omfilters %}
+<header>
+    <!--Logomarca-->
+    <nav id="logo">
+        <a>
+          <img src="{% static 'imagens/logo-preto.avif' %}" alt="Logo" width="10%" height="10%">
+        </a>
+    </nav>
+
+    <!--Menu de Navegação-->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand">Menu</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a href="{% url 'vitrine:home' %}" class="nav-link">Início</a></li>
+            <li class="nav-item"><a href="{% url 'produto:lista' %}" class="nav-link">Cervejas</a></li>
+            <li class="nav-item"><a href="{% url 'carrinho:carrinho' %}" class="nav-link">Carrinho</a></li>
+            <li class="nav-item"><a href="contato.html" class="nav-link">Contato</a></li>
+
+            {% if request.user.is_authenticated %}
+            <li class="nav-item"><a href="#" class="nav-link">Meus pedidos</a></li>
+            <li class="nav-item"><a href="#" class="nav-link">Atualizar meus dados</a></li>
+            <li class="nav-item"><a href="{% url 'perfil:logout' %}" class="nav-link">Sair</a></li>
+            {% else %}
+            <li class="nav-item"><a href="{% url 'perfil:login' %}" class="nav-link">Login</a></li>
+            <li class="nav-item"><a href="{% url 'perfil:criar' %}" class="nav-link">Cadastre-se</a></li>
+            {% endif %}
+          </ul>
+
+          <!--Formulario de busca-->
+          <div id="busca" class="d-flex search-bar" role="search">
+              <form class="input-group" action="{% url 'produto:buscar' %}">
+                <input class="form-control me-2" type="search" placeholder="Busca" aria-label="Search" name="termo">
+                <button id="searchButton" class="btn btn-outline-success" type="submit">Busca</button>
+              </form>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header> 

@@ -1,0 +1,64 @@
+{% extends 'index.html' %}
+{% load omfilters %}
+
+{% block titulo %}Carrinho | {% endblock %}
+
+{% block conteudo %}
+
+{% if carrinho %}
+
+<!-- <div class="row mt-3">
+    <div class="col">
+        <h3>Carrinho de compras</h3>
+        <p class="lead">Os produtos, quantidades e preços que você escolheu.</p>
+
+        {% include 'parciais/_carrinho.html' %}
+    </div>
+</div> -->
+<main class="checkout">
+    <div id="titulo">
+      <h1>Carrinho - Checkout</h1>
+      <h3>Preencha o formulário para concluir sua compra</h3>
+    </div>
+</main>
+<hr>
+
+<div class="row g-5" style="margin: 0.2rem 0;">
+    <div class="col-md-5 col-lg-4 order-md-last" style="margin: auto !important;">
+      <h4 class="d-flex justify-content-between align-items-center mb-3">
+        <span class="text-primary">Seu carrinho</span>
+        <span class="badge bg-primary rounded-pill">{{ carrinho|cart_total_qtd }}</span>
+      </h4>
+      {% include 'parciais/_carrinho.html' %}
+    </div>
+</div>
+
+<div class="row g-5" style="margin: 0.2rem 0;">
+    <div class="col-md-5 col-lg-4" style="margin: auto !important;">
+        {% if request.user.is_authenticated %}
+        <a class="btn btn-lg btn-block btn-primary" href="{% url 'carrinho:resumodacompra' %}" style="width: 100%;">
+            Comprar
+        </a>
+        {% else %}
+        <a class="btn btn-lg btn-block btn-primary" href="{% url 'perfil:criar' %}" style="width: 100%;">
+            Entrar ou cadastrar e comprar
+        </a>
+        {% endif %}
+    </div>
+</div>
+
+{% else %}
+
+<div class="row mt-3">
+    <div class="col">
+        <h3>Carrinho vazio</h3>
+        <p class="lead">Não há produtos no seu carrinho.</p>
+    </div>
+</div>
+
+{% endif %}
+
+
+
+
+{% endblock %}

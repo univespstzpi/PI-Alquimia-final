@@ -1,0 +1,56 @@
+{% extends 'index.html' %}
+{% load omfilters %}
+{% load static %}
+
+{% block titulo %}Produtos | {% endblock %}
+
+{% block conteudo %}
+
+<main>
+    <div id="titulo">
+      <h1>NOSSAS CERVEJAS</h1>
+      <h3>Da Pilsen à IPA: Qual a sua favorita?</h3>
+      <img src="{% static 'imagens/alq15.jpeg' %}" alt="growlers" width="70%">
+    </div>
+</main>
+<hr>
+
+<section class="growler">
+    <h3>Escolha o growler do seu estilo preferido*</h3>
+
+    <div class="container-growler">
+        {% for produto in produtos %}
+        
+        <div class="card-growler">
+            {% if produto.imagem %}
+                    <img class="card-img-top" src="{{ produto.imagem.url }}" alt="{{ produto.nome }}">
+                {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ produto.nome }} <br> 
+                    {% if produto.preco_marketing_promocional %}
+                        {{ produto.preco_marketing_promocional|formata_preco }}
+                    {% else %}
+                        {{ produto.preco_marketing|formata_preco }}
+                    {% endif %}
+                </h5>
+                <p class="card-text">{{ produto.descricao_curta }}</p>
+                <form action="{% url 'carrinho:adicionaraocarrinho' %}" id="form-add-to-cart" class="quantidade">
+                    <label class="input-text" for="inputGroupSelect01">Quantidade: </label>
+                    <input type="number" id="qtd" name="qtd" min="0" max="20" step="1">
+                    <input type="hidden" name="vid" value="{{ produto.id }}" />
+                    <button class="btn btn-primary btn-sm m-1 btn-block comprar" type="submit">Comprar</button>
+                </form>                
+            </div>
+        </div>  
+        {% endfor %}  
+    </div>
+
+    <div class="row mt-3">
+        <div class="col">
+            {% include 'parciais/_pagination.html' %}
+        </div>
+    </div>
+</section>
+<hr>
+
+{% endblock %}

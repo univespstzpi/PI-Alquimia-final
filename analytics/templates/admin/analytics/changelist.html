@@ -1,0 +1,9 @@
+{% extends "admin/change_list.html" %}
+{% load i18n admin_urls static admin_list %}
+
+{% block object-tools-items %}
+    <li><a href="{% url 'admin:analytics_relatorio_termos_buscados' %}" class="viewlink">Relatório de Termos Mais Buscados</a></li>
+    <li><a href="{% url 'admin:analytics_bounce_rate_report' %}" class="viewlink">Relatório de Taxa de Rejeição</a></li>
+    <li><a href="{% url 'admin:analytics_best_selling_products_report' %}" class="viewlink">Relatório de Produtos Mais Vendidos</a></li>
+    {{ block.super }}
+{% endblock %}

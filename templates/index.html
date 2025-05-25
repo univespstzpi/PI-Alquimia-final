@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    {% include 'parciais/_head_novo.html' %}
+    
+    <title>{% block titulo %}{% endblock %}Alquimia</title>
+</head>
+
+<body>
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        {% include 'parciais/_nav_novo.html' %}
+        
+        {% include 'parciais/_messages.html' %}
+
+        {% block conteudo %}{% endblock %}
+
+        {% include 'parciais/_footer_new.html' %}
+    </div>
+</body>
+
+</html>

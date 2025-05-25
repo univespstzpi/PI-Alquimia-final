@@ -1,0 +1,369 @@
+@charset "UTF-8";
+
+body {
+    background: black!important;
+    color: white!important;
+}
+
+.navbar {
+    background-color: rgb(245, 240, 240)!important;
+}
+
+.navbar-brand{
+    margin-left: 10%;
+}
+
+#user-input { width: 100%;}
+.user { color: blue; }
+.bot { color: black; }
+
+/* Ícone fixo no canto inferior direito */
+.chatbot-icon {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    z-index: 1000;
+    cursor: pointer;
+  }
+  
+  /* Caixa do chatbot (escondida por padrão) */
+  .chatbot-box {
+    position: fixed;
+    bottom: 140px; /* Acima do ícone */
+    right: 20px;
+    width: 320px;
+    max-width: 90vw;
+    height: fit-content;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    display: none; /* Esconde por padrão */
+    z-index: 1001;
+    padding: 16px;
+  }
+  
+
+#logo {
+    text-align: center;
+}
+
+.nav-item :hover{
+    background-color: rgb(231, 219, 159);
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+h1, h3{
+    text-align: center;
+    font-size: 50px;
+    margin-top: 50px;
+    padding: 10px 50px;
+}
+
+section *{
+    text-align: center;
+    animation-duration: 4s;
+    animation-name: slidein;
+    animation-delay: 2s;
+}
+
+.container{
+    grid-area: container;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 330px));
+    justify-content: center;
+    margin: 0 0 15px 0;
+    padding: 15px;
+    gap: 20px 20px;
+    text-align: center;
+}
+
+.card{
+    text-align: center;
+}
+
+.container-growler {
+    grid-area: container-growler;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 330px));
+    grid-template-rows: auto auto;
+    justify-content: center;
+    margin: 0 0 15px 0;
+    padding: 15px;
+    gap: 20px 20px;
+}
+
+.card-img-top{
+    height: 70vh;
+    padding: 15px;
+    border: 1px solid black;
+}
+
+.card-text{
+    text-align: justify;
+}
+
+.comprar{
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.comprar:hover{
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+}
+
+.quantidade>input{
+    border: none;
+    border-radius: 5px;
+    margin: 0 10px;
+}
+
+.delivery {
+    margin: 0 auto;
+    text-align: center;
+    max-width: 90%;
+    animation-name: slidein;
+    animation-duration: 3s;
+}
+
+.carrinho{
+    max-width: 90vw;
+    margin: 30px;
+}
+
+.cadastro{
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.cadastro *{
+    text-align: center;
+    margin: 0 auto;
+}
+
+.enviar{
+    margin: 15px;
+    padding: 15px;
+}
+
+.form-check{
+    text-align: left;
+}
+
+.contato *{
+    border-radius: 10px;
+    width: 80vw;
+    text-align: center;
+    margin: 0 auto;
+    padding: 10px 10px;
+}
+
+#inAssunto{
+    width: 80%;
+    height: 30vh;
+}
+
+.btn:hover{
+    color: white !important;
+    background-color: black!important;
+}
+
+.form-login{
+    margin: 0 auto;
+    padding: 15px;
+    margin-top: 15px;
+    background-color: rgb(194, 177, 177);
+    border-radius: 10px;
+    color: black;
+    max-width: 300px;
+}
+
+main {
+    text-align: center;
+    animation-duration: 3s;
+    animation-name: slidein;
+}
+  
+@keyframes slidein {
+    from {
+      margin-left: 100%;
+      width: 300%;
+    }
+  
+    to {
+      margin-left: 0%;
+      width: 100%;
+    }
+}
+  
+.slider {
+    position: relative;
+    width: 80%;
+    max-width: 90vw;
+    margin: auto;
+    overflow: hidden;
+}
+.slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 50%;
+}
+.slide {
+    width: 100%;
+    flex-shrink: 0;
+    padding: 15px;
+}
+.slide img {
+    width: 80%;
+    display: block;
+}
+.navigation {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+}
+.navigation button {
+    background: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 40px;
+}
+
+#widget-whatsapp.left {
+  left: 15px;
+}
+
+#widget-whatsapp {
+  position: fixed;
+  bottom: 40px;
+  z-index: 999;
+}
+
+#widget-whatsapp :hover {
+  box-shadow: rgba(229, 223, 223, 0.7) 2px 2px 11px;
+}
+
+footer{
+    text-align: center;
+    animation-name: slidein;
+    animation-delay: 4s;
+    animation-duration: 3s;
+    margin: 15px;
+}
+
+.endereco *{
+    padding: 0;
+    margin: 0;
+    margin-left: 10%;
+    text-align: left;
+    text-decoration: none;
+    color: white;
+}
+
+.email{
+    color: white;
+    text-decoration: none;
+}
+
+#sociais{
+    padding: 20px;
+}
+
+#sociais>a{
+    padding: 20px;
+}
+
+#sociais>a :hover{
+    fill:yellow;
+    box-shadow: 1px 1px 15px yellow;
+}
+
+.mapa :hover {
+    cursor: pointer;
+}
+
+.accessibility-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #053c77;
+    color: white;
+    border: 1px solid white;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    font-size: 24px;
+    z-index: 1;
+}
+
+.accessibility-button:hover{
+    box-shadow: 1px 1px 15px white;
+}
+
+.accessibility-options {
+    display: none;
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    background-color: white;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    z-index: 1000;
+}
+
+.whatsapp-button {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background-color: #d7e5dc;
+    color: white;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+    z-index: 1000;
+}
+
+.whatsapp-button img {
+    width: 40px;
+    height: 40px;
+}
+
+.whatsapp-button:hover {
+    box-shadow: 1px 1px 15px greenyellow;
+}
+
+.accessibility-options button {
+    background-color: transparent;
+    border: none;
+    color: black;
+    padding: 10px;
+    cursor: pointer;
+    width: 1000%;
+    text-align: left;
+}
+
+.high-contrast {
+    background-color: black!important;
+    color: yellow!important;
+}

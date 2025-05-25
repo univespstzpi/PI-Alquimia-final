@@ -1,0 +1,21 @@
+{% extends 'index.html' %}
+
+{% block titulo %}Pagamento | {% endblock %}
+
+{% load omfilters %}
+{% load static %}
+
+{% block conteudo %}
+<div class="row">
+    <div class="col">
+        <h2>O pagamento deverá ser realizado na retirada dos produtos na loja</h3>
+        <h3 class="">Alquimia Cervejaria</h3>
+        <address>Avenida Maria Aparecida Andrade, 532, Sertãozinho - SP.</address>
+        <a href="mailto:contato@cervejariaalquimia.com.br">contato@cervejariaalquimia.com.br</a>
+    </div>
+</div>
+<hr />
+{% include 'parciais/_pedido.html' %}
+
+
+{% endblock %}

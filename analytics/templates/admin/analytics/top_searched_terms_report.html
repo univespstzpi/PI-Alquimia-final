@@ -1,0 +1,45 @@
+{% extends 'admin/base_site.html' %} <!-- Ou seu template base principal -->
+{% load static %}
+
+{% block title %}{{ title }} | {{ site_header|default:_('Django site admin') }}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:_('Django administration') }}</a></h1>
+{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">Início</a> &rsaquo;
+<a href="{% url 'admin:analytics_searchterm_changelist' %}">Termos Buscados</a> &rsaquo;
+Relatórios &rsaquo;
+Termos Mais Buscados
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+
+    {% if top_terms %}
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Termo Buscado</th>
+                    <th scope="col">Número de Buscas</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in top_terms %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ item.term }}</td>
+                    <td>{{ item.search_count }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Ainda não há dados de busca para exibir. Realize algumas buscas no site primeiro.</p>
+    {% endif %}
+</div>
+{% endblock %}

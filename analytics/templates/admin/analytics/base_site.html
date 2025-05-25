@@ -1,0 +1,39 @@
+{% extends 'admin/base.html' %}
+{% load i18n static %}
+
+{% block extrahead %}
+    {{ block.super }} {# Inclui qualquer coisa que base.html já tenha no extrahead #}
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'admin/css/nav_sidebar.css' %}">
+    {# Você pode adicionar seus próprios CSS personalizados aqui, se precisar #}
+{% endblock %}
+
+{% block branding %}
+    <h1 id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:_('Django administration') }}</a></h1>
+{% endblock %}
+
+{% block nav-sidebar %}
+    {% if nav_sidebar_enabled %}
+        <div class="sidebar" id="nav-sidebar">
+            {% block nav-sidebar-top %}
+                {# Conteúdo padrão do topo da barra lateral, se necessário. Deixe vazio se não quiser nada aqui. #}
+            {% endblock %}
+
+            {# --- SEU CONTEÚDO PERSONALIZADO AQUI --- #}
+            {# Exemplo: Um link para uma view personalizada #}
+            <div class="app-minha_app"> {# Use uma classe similar para manter o estilo do admin #}
+                <h2>Ferramentas Personalizadas</h2>
+                <ul>
+                    <li class="addlink"> {# Adicione a classe 'addlink' para o estilo de link do admin #}
+                        <a href="{% url 'admin:analytics_relatorio_termos_buscados' %}">Relatório de Buscas</a>
+                    </li>
+                </ul>
+            </div>
+            {# --- FIM DO SEU CONTEÚDO PERSONALIZADO --- #}
+
+            {# Inclui o conteúdo original do nav-sidebar, ou seja, a lista de apps e modelos #}
+            {# Você pode usar o bloco '{{ block.super }}' para incluir o conteúdo do template pai #}
+            {{ block.super }} 
+        </div>
+    {% endif %}
+{% endblock %}

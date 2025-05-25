@@ -1,0 +1,165 @@
+{% extends 'admin/base_site.html' %}
+{% load static i18n %}
+
+{% block title %}{{ title }} | {{ site_header|default:_('Django site admin') }}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:_('Django administration') }}</a></h1>
+{% endblock %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+<a href="{% url 'admin:index' %}">Início</a> &rsaquo;
+<a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ opts.app_config.verbose_name }}</a> &rsaquo;
+Relatórios &rsaquo;
+Produtos Mais Vendidos
+</div>
+{% endblock %}
+
+{% block content %}
+<div id="content-main" class="analytics-report">
+    <form method="get" action="">
+        <label for="limit">Mostrar Top:</label>
+        <input type="number" name="limit" id="limit" value="{{ current_limit }}" min="1" max="100" style="width: 60px;">
+        <input type="submit" value="Atualizar" class="button">
+    </form>
+
+    {% if best_selling_products %}
+        <div class="chart-container" style="position: relative; height:40vh; max-width:800px; width:100%; margin: 20px auto;">
+            <canvas id="bestSellingChart"></canvas>
+        </div>
+
+        <h2>Dados Tabulados</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Produto</th>
+                    <th scope="col">Quantidade Vendida</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in best_selling_products %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ item.produto }}</td>
+                    <td>{{ item.total_quantity_sold }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Não há dados de vendas de produtos para exibir (considerando pedidos com status Aprovado, Enviado ou Finalizado).</p>
+    {% endif %}
+
+    <p><a href="{% url 'admin:analytics_searchterm_changelist' %}" class="button">Voltar para Termos Buscados</a></p>
+</div>
+
+{{ product_labels_json|json_script:"product_labels_data" }}
+{{ product_data_json|json_script:"product_data_data" }}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const ctx = document.getElementById('bestSellingChart');
+        const productLabelsDataEl = document.getElementById('product_labels_data');
+        const productDataDataEl = document.getElementById('product_data_data');
+
+        if (ctx) {
+            try {
+                const productLabels = JSON.parse(productLabelsDataEl.textContent);
+                const productData = JSON.parse(productDataDataEl.textContent);
+
+                console.log("Chart Labels:", productLabels);
+                console.log("Chart Data:", productData);
+
+                // Paleta de cores para as barras
+                const backgroundColors = [
+                    'rgba(255, 99, 132, 0.5)', 'rgba(54, 162, 235, 0.5)',
+                    'rgba(255, 206, 86, 0.5)', 'rgba(75, 192, 192, 0.5)',
+                    'rgba(153, 102, 255, 0.5)', 'rgba(255, 159, 64, 0.5)',
+                    'rgba(199, 199, 199, 0.5)', 'rgba(83, 102, 255, 0.5)',
+                    'rgba(40, 159, 64, 0.5)', 'rgba(210, 99, 132, 0.5)'
+                ];
+                const borderColors = [
+                    'rgba(255, 99, 132, 1)', 'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)', 'rgba(255, 159, 64, 1)',
+                    'rgba(199, 199, 199, 1)', 'rgba(83, 102, 255, 1)',
+                    'rgba(40, 159, 64, 1)', 'rgba(210, 99, 132, 1)'
+                ];
+
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: productLabels,
+                        datasets: [{
+                            label: 'Quantidade Vendida',
+                            data: productData,
+                            backgroundColor: backgroundColors.slice(0, productData.length),
+                            borderColor: borderColors.slice(0, productData.length),
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Produtos Mais Vendidos', // Título do Gráfico
+                                font: {
+                                    size: 16
+                                }
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.y !== null) {
+                                            label += context.parsed.y + ' unidades';
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    precision: 0 // Garante que o eixo Y mostre apenas inteiros
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Quantidade Vendida' // Rótulo do Eixo Y
+                                }
+                            },
+                            x: {
+                                ticks: {
+                                    autoSkip: false, // Mostra todos os rótulos
+                                    maxRotation: 45, // Rotaciona para caber melhor
+                                    minRotation: 30
+                                },
+                                title: {
+                                    display: true,
+                                    text: 'Produto' // Rótulo do Eixo X
+                                }
+                            }
+                        },
+                        responsive: true,
+                        maintainAspectRatio: false
+                    }
+                });
+            } catch (e) {
+                console.error("Erro ao inicializar o gráfico:", e);
+                if (productLabelsDataEl) console.error("Conteúdo de product_labels_data:", productLabelsDataEl.textContent);
+                if (productDataDataEl) console.error("Conteúdo de product_data_data:", productDataDataEl.textContent);
+                // Você pode adicionar uma mensagem de erro para o usuário aqui, se desejar
+                // ctx.parentElement.innerHTML = "<p>Ocorreu um erro ao carregar o gráfico. Verifique o console para mais detalhes.</p>";
+            }
+        }
+    });
+</script>
+{% endblock %}

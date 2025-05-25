@@ -1,0 +1,92 @@
+/*
+ * Globals
+ */
+
+
+/* Custom default button */
+.btn-light,
+.btn-light:hover,
+.btn-light:focus {
+  color: #333;
+  text-shadow: none; /* Prevent inheritance from `body` */
+}
+
+
+/*
+ * Base structure
+ */
+
+body {
+    background-color: #333;
+    text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
+    box-shadow: inset 0 0 5rem rgba(0, 0, 0, .5);
+    color: #fff !important;
+}
+
+.card-columns, .card-body, .card-footer {
+    color: #fff !important;
+    background-color: #333 !important;
+}
+
+.card-body .text-muted {
+    font-weight: 600 !important;
+    color: #fff !important;
+}
+
+#variation-preco {
+    color: #fff !important;
+}
+
+/* .card-body .price-old {
+    font-size: small;
+} */
+
+.lead .product-price {
+  font-weight: 600 !important;
+  color: #fff !important;
+}
+
+.lead .product-old-price {
+    font-size: small !important;
+}
+
+.product-price-block .product-old-price{
+  font-size: small !important;
+}
+
+.product-price-block .product-price {
+  font-weight: 600 !important;
+  color: #fff !important;
+}
+
+.card-columns {
+    border: 0cm !important;
+}
+
+.cover-container {
+  max-width: 42em;
+}
+
+
+/*
+ * Header
+ */
+
+.nav-masthead .nav-link {
+  color: rgba(255, 255, 255, .5);
+  border-bottom: .25rem solid transparent;
+}
+
+.nav-masthead .nav-link:hover,
+.nav-masthead .nav-link:focus {
+  border-bottom-color: rgba(255, 255, 255, .25);
+}
+
+.nav-masthead .nav-link + .nav-link {
+  margin-left: 1rem;
+}
+
+.nav-masthead .active {
+  color: #fff;
+  border-bottom-color: #fff;
+}
